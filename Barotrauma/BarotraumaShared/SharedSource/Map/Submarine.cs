@@ -1,4 +1,4 @@
-﻿using Barotrauma.Items.Components;
+using Barotrauma.Items.Components;
 using Barotrauma.Networking;
 using Barotrauma.Extensions;
 using FarseerPhysics;
@@ -1252,6 +1252,9 @@ namespace Barotrauma
 
             Rectangle dimensions = CalculateDimensions();
             element.Add(new XAttribute("dimensions", XMLExtensions.Vector2ToString(dimensions.Size.ToVector2())));
+
+            element.Add(new XAttribute("mass", PhysicsBody.Mass.ToString()));
+
             element.Add(new XAttribute("recommendedcrewsizemin", Info.RecommendedCrewSizeMin));
             element.Add(new XAttribute("recommendedcrewsizemax", Info.RecommendedCrewSizeMax));
             element.Add(new XAttribute("recommendedcrewexperience", Info.RecommendedCrewExperience ?? ""));

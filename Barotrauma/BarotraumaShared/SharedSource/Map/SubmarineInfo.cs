@@ -93,6 +93,24 @@ namespace Barotrauma
             private set;
         }
 
+        public double Mass
+        {
+            get;
+            private set;
+        }
+
+        public double EngineOutput
+        {
+            get;
+            private set;
+        }
+
+        public double PumpOutput
+        {
+            get;
+            private set;
+        }
+
         public string FilePath
         {
             get;
@@ -209,6 +227,9 @@ namespace Barotrauma
             Type = original.Type;
             hash = !string.IsNullOrEmpty(original.FilePath) ? original.MD5Hash : null;
             Dimensions = original.Dimensions;
+            Mass = original.Mass;
+            EngineOutput = original.EngineOutput;
+            PumpOutput = original.PumpOutput;
             FilePath = original.FilePath;
             RequiredContentPackages = new HashSet<string>(original.RequiredContentPackages);
             IsFileCorrupted = original.IsFileCorrupted;
@@ -236,6 +257,9 @@ namespace Barotrauma
                 Tags = tags;
             }
             Dimensions = SubmarineElement.GetAttributeVector2("dimensions", Vector2.Zero);
+            Mass = SubmarineElement.GetAttributeFloat("mass", 0);
+            EngineOutput = SubmarineElement.GetAttributeFloat("engineoutput", 0);
+            PumpOutput = SubmarineElement.GetAttributeFloat("pumpoutput", 0);
             RecommendedCrewSizeMin = SubmarineElement.GetAttributeInt("recommendedcrewsizemin", 0);
             RecommendedCrewSizeMax = SubmarineElement.GetAttributeInt("recommendedcrewsizemax", 0);
             RecommendedCrewExperience = SubmarineElement.GetAttributeString("recommendedcrewexperience", "Unknown");

@@ -36,6 +36,16 @@ namespace Barotrauma
             }
         }
 
+        private void CreatePreviewRow(GUIListBox descriptionBox, float leftPanelWidth, float rightPanelWidth, ScalableFont font, String fieldName, String fieldValue)
+        {
+            var rowText = new GUITextBlock(new RectTransform(new Vector2(leftPanelWidth, 0), descriptionBox.Content.RectTransform),
+                TextManager.Get(fieldName), textAlignment: Alignment.TopLeft, font: font, wrap: true)
+            { CanBeFocused = false };
+            new GUITextBlock(new RectTransform(new Vector2(rightPanelWidth, 0.0f), rowText.RectTransform, Anchor.TopRight, Pivot.TopLeft),
+                fieldValue, textAlignment: Alignment.TopLeft, font: font, wrap: true)
+            { CanBeFocused = false };
+            rowText.RectTransform.MinSize = new Point(0, rowText.Children.First().Rect.Height);
+        }
 
         public void CreatePreviewWindow(GUIComponent parent)
         {
@@ -81,6 +91,20 @@ namespace Barotrauma
                 { CanBeFocused = false };
                 dimensionsText.RectTransform.MinSize = new Point(0, dimensionsText.Children.First().Rect.Height);
             }
+
+            CreatePreviewRow(descriptionBox, leftPanelWidth, rightPanelWidth, font, "Mass", (Mass * Physics.DisplayToRealWorldRatio).ToString("N2"));
+            /*
+            var massText = new GUITextBlock(new RectTransform(new Vector2(leftPanelWidth, 0), descriptionBox.Content.RectTransform),
+                TextManager.Get("Mass"), textAlignment: Alignment.TopLeft, font: font, wrap: true)
+            { CanBeFocused = false };
+            new GUITextBlock(new RectTransform(new Vector2(rightPanelWidth, 0.0f), massText.RectTransform, Anchor.TopRight, Pivot.TopLeft),
+                (Mass * Physics.DisplayToRealWorldRatio).ToString("N2"), textAlignment: Alignment.TopLeft, font: font, wrap: true)
+            { CanBeFocused = false };
+            massText.RectTransform.MinSize = new Point(0, massText.Children.First().Rect.Height);
+            */
+            CreatePreviewRow(descriptionBox, leftPanelWidth, rightPanelWidth, font, "EngineOutput", (EngineOutput * Physics.DisplayToRealWorldRatio).ToString("N2"));
+            CreatePreviewRow(descriptionBox, leftPanelWidth, rightPanelWidth, font, "PumpOutput", (PumpOutput * Physics.DisplayToRealWorldRatio).ToString("N2"));
+
 
             if (RecommendedCrewSizeMax > 0)
             {
